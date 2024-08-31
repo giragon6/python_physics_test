@@ -1,6 +1,8 @@
 import pygame
 from ball import Ball
 
+# press space to go up!
+
 def main():
     # pygame setup
     pygame.init()
@@ -9,7 +11,7 @@ def main():
     running = True
     dt = 0
 
-    ball = Ball(screen, 250, 250, 25)
+    ball = Ball(screen, 250, 250, 25, vx=-20) # vx = starting x velocity
 
     while running:
 
@@ -17,9 +19,13 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            ball.pos.y -= 5
+
         screen.fill((255, 255, 255))
 
-        ball.update(dt)
+        ball.update()
         ball.draw()
 
         pygame.display.flip()
